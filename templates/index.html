@@ -42,19 +42,36 @@
                 <div class="card-body text-center ">
                     <h4 class="card-title white-text"><strong>Continue With</strong></h4>
                     <div class="row justify-content-center">
-                        <a class="btn-floating accent-1 end-btn waves-effect waves-light m-3"><i
-                                class="fa fa-google"></i></a>
+                        {#                        <a class="btn-floating accent-1 end-btn waves-effect waves-light m-3"><i#}
+                        {#                                class="fa fa-google"></i></a>#}
                         <a id="fb-login-custom" class="btn-floating accent-1 end-btn waves-effect waves-light m-3"><i
                                 class="fa fa-facebook"></i></a>
-                        <a class="btn-floating accent-1 end-btn waves-effect waves-light m-3"><i
-                                class="fa fa-twitter"></i></a>
+                        {#                        <a class="btn-floating accent-1 end-btn waves-effect waves-light m-3"><i#}
+                        {#                                class="fa fa-twitter"></i></a>#}
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
 </div>
+
+<button id="open-model-button" type="button" class="btn btn-primary" data-toggle="modal" data-target="#frameModalBottom"
+        style="display: none"></button>
+<div class="modal fade bottom" id="frameModalBottom" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-frame modal-bottom" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="row d-flex justify-content-center align-items-center">
+                    <p class="pt-3 pr-2">Please Login with Facebook in Order to Continue. We require only your Name and
+                        Email in order to Login.</p>
+                    <button type="button" class="btn peach-gradient" data-dismiss="modal">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script type="text/javascript" src="/static/js/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="/static/js/popper.min.js"></script>
 <script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
@@ -65,8 +82,20 @@
             if (response.authResponse) {
                 FB.api('/me', {locale: 'en_US', fields: 'name, email'},
                     function (response) {
-                        console.log(response.email);
-                        console.log(response.name);
+                        if (!(response.email && response.name)) {
+                            $('#open-model-button').click();
+                        }
+                        else {
+                            $.ajax({
+                                url: '/login',
+                                type: 'POST',
+                                data: JSON.stringify({name:request.name,email:request.email}),
+                                contentType: 'application/json; charset=utf-8',
+                                dataType: 'json',
+                                async: false,
+                                success: function (msg) {}
+                            });
+                        }
                     }
                 );
             }

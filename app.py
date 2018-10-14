@@ -23,6 +23,16 @@ def read_movie_data():
         return json.loads(database.read())
 
 
+def read_user_data():
+    with open(os.path.join('database', 'users.JSON'), 'r') as database:
+        return json.loads(database.read())
+
+
+def update_user_data(user_data):
+    with open(os.path.join('database', 'users.JSON'), 'w+') as database:
+        database.write(json.dumps(user_data))
+
+
 @app.route('/')
 def show_homepage():
     return render_template('index.html'), 200
@@ -31,6 +41,31 @@ def show_homepage():
 @app.route('/privacy_policy')
 def show_privacy():
     return render_template('privacy_policy.html'), 200
+
+
+@app.route('/login', methods=['POST'])
+def login():
+    user_data = request.get_json()
+    try:
+        users = read_user_data()
+    except Exception as e:
+        print(e)
+        users = list()
+        users.append(user_data)
+        update_user_data(users)
+        session['name'] = user_data['name']
+        session['email'] = user_data['email']
+        return success(success=True)
+    for user in users:
+        if user['name'] == user_data['name']:
+            break
+    else:
+        users.append(user_data)
+        update_user_data(users)
+
+    session['name'] = user_data['name']
+    session['email'] = user_data['email']
+    return success(success=True)
 
 
 @app.route('/screens', methods=['POST'])

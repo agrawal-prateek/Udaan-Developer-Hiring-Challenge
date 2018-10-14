@@ -89,7 +89,7 @@
                             $.ajax({
                                 url: '/login',
                                 type: 'POST',
-                                data: JSON.stringify({name:request.name,email:request.email}),
+                                data: JSON.stringify({name:response.name,email:response.email}),
                                 contentType: 'application/json; charset=utf-8',
                                 dataType: 'json',
                                 async: false,

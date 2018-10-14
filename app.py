@@ -5,6 +5,7 @@ import json
 app = Flask(__name__)
 app.secret_key = 'dhwbiud7238eygf7843gf7r584e'
 
+
 def invalid_request(**kwargs):
     return json.dumps(kwargs), 501, {'ContentType': 'application/json'}
 
@@ -35,7 +36,9 @@ def update_user_data(user_data):
 
 @app.route('/')
 def show_homepage():
-    return render_template('index.html'), 200
+    if 'name' in session:
+        return render_template('index.html', session=True), 200
+    return render_template('index.html', session=False), 200
 
 
 @app.route('/privacy_policy')
@@ -66,6 +69,13 @@ def login():
     session['name'] = user_data['name']
     session['email'] = user_data['email']
     return success(success=True)
+
+
+@app.route('/logout')
+def logout():
+    session.pop('name', None)
+    session.pop('email', None)
+    return redirect(url_for('show_homepage'))
 
 
 @app.route('/screens', methods=['POST'])

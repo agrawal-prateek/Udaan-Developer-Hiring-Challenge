@@ -33,6 +33,9 @@
         <img src="/static/img/udaan.png" height="70" alt="mdb logo">
         <strong>Ticket Booking Platform</strong>
     </a>
+    {% if session==True %}
+        <a href="/logout" class="btn btn-outline-white btn-sm my-0" ><strong>Logout</strong><i class="fa fa-sign-in ml-2"></i></a>
+    {% endif %}
 </nav>
 
 <div class="jumbotron vertical-center">
@@ -93,8 +96,8 @@
                                 contentType: 'application/json; charset=utf-8',
                                 dataType: 'json',
                                 async: false,
-                                success: function (msg) {
-                                    console.log(msg);
+                                success: function (data) {
+
                                 }
                             });
                         }

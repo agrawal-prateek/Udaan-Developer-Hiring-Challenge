@@ -13,6 +13,8 @@
 </head>
 
 <body>
+
+{% if session==False %}
 <div id="fb-root"></div>
 <script>(function (d, s, id) {
     var js, fjs = d.getElementsByTagName(s)[0];
@@ -21,13 +23,14 @@
     js.id = id;
     js.src = 'https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v3.1&appId=153101032000995&autoLogAppEvents=1';
     fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));
-</script>
+}(document, 'script', 'facebook-jssdk'));</script>
 <script>
     FB.getLoginStatus(function (response) {
         statusChangeCallback(response);
     });
 </script>
+{% endif %}
+
 <nav class="navbar navbar-dark peach-gradient primary-color">
     <a class="navbar-brand" href="/">
         <img src="/static/img/udaan.png" height="70" alt="mdb logo">
@@ -38,6 +41,7 @@
     {% endif %}
 </nav>
 
+{% if session==False %}
 <div class="jumbotron vertical-center">
     <div class="row">
         <div class="col-md-auto">
@@ -57,7 +61,6 @@
         </div>
     </div>
 </div>
-
 <button id="open-model-button" type="button" class="btn btn-primary" data-toggle="modal" data-target="#frameModalBottom"
         style="display: none"></button>
 <div class="modal fade bottom" id="frameModalBottom" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
@@ -74,11 +77,13 @@
         </div>
     </div>
 </div>
+{% endif %}
 
 <script type="text/javascript" src="/static/js/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="/static/js/popper.min.js"></script>
 <script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="/static/js/mdb.min.js"></script>
+{% if session==False %}
 <script>
     document.getElementById('fb-login-custom').addEventListener('click', function () {
         FB.login(function (response) {
@@ -107,6 +112,7 @@
         }, {scope: 'email,public_profile', return_scopes: true});
     }, false);
 </script>
+{% endif %}
 </body>
 
 </html>

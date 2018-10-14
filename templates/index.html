@@ -35,17 +35,19 @@
         <strong>Ticket Booking Platform</strong>
     </a>
 
-    <ul class="nav tabs-cyan" id="myTab" role="tablist">
-        <li class="nav-item">
-            <a class="nav-link  white-text waves-light active" data-toggle="tab" href="#tab1" role="tab"
-               aria-controls="tab1">Add Movie</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link white-text waves-light" data-toggle="tab" href="#tab2" role="tab" aria-controls="tab2"
-               onclick="loadmovies()">Avaliablity</a>
-        </li>
-    </ul>
     {% if session==True %}
+
+        <ul class="nav tabs-cyan" id="myTab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link  white-text waves-light active" data-toggle="tab" href="#tab1" role="tab"
+                   aria-controls="tab1">Add Movie</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link white-text waves-light" data-toggle="tab" href="#tab2" role="tab"
+                   aria-controls="tab2"
+                   onclick="loadmovies()">Avaliablity</a>
+            </li>
+        </ul>
         <a href="/logout" class="btn btn-outline-white btn-sm my-0"><strong>Logout</strong><i
                 class="fa fa-sign-in ml-2"></i></a>
     {% else %}

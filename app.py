@@ -3,7 +3,7 @@ import os
 import json
 
 app = Flask(__name__)
-
+app.secret_key = 'dhwbiud7238eygf7843gf7r584e'
 
 def invalid_request(**kwargs):
     return json.dumps(kwargs), 501, {'ContentType': 'application/json'}

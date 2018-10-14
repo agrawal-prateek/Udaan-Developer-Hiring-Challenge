@@ -28,6 +28,11 @@ def show_homepage():
     return render_template('index.html'), 200
 
 
+@app.route('/privacy_policy')
+def show_privacy():
+    return render_template('privacy_policy.html'), 200
+
+
 @app.route('/screens', methods=['POST'])
 def add_movie_screen():
     try:

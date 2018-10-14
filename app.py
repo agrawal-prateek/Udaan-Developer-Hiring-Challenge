@@ -60,7 +60,7 @@ def login():
         session['email'] = user_data['email']
         return success(success=True)
     for user in users:
-        if user['name'] == user_data['name']:
+        if user['name'] == user_data['name'] and user['email'] == user_data['email']:
             break
     else:
         users.append(user_data)

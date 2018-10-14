@@ -15,20 +15,20 @@
 <body>
 
 {% if session==False %}
-<div id="fb-root"></div>
-<script>(function (d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s);
-    js.id = id;
-    js.src = 'https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v3.1&appId=153101032000995&autoLogAppEvents=1';
-    fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
-<script>
-    FB.getLoginStatus(function (response) {
-        statusChangeCallback(response);
-    });
-</script>
+    <div id="fb-root"></div>
+    <script>(function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s);
+        js.id = id;
+        js.src = 'https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v3.1&appId=153101032000995&autoLogAppEvents=1';
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+    <script>
+        FB.getLoginStatus(function (response) {
+            statusChangeCallback(response);
+        });
+    </script>
 {% endif %}
 
 <nav class="navbar navbar-dark peach-gradient primary-color">
@@ -37,31 +37,16 @@
         <strong>Ticket Booking Platform</strong>
     </a>
     {% if session==True %}
-        <a href="/logout" class="btn btn-outline-white btn-sm my-0" ><strong>Logout</strong><i class="fa fa-sign-in ml-2"></i></a>
+        <a href="/logout" class="btn btn-outline-white btn-sm my-0"><strong>Logout</strong><i
+                class="fa fa-sign-in ml-2"></i></a>
+    {% else %}
+        <a id="open-login-model-button" data-toggle="modal" data-target="#modalLoginForm"
+           class="btn btn-outline-white btn-sm my-0"><strong>Login</strong><i
+                class="fa fa-sign-in ml-2"></i></a>
     {% endif %}
 </nav>
-
-{% if session==False %}
-<div class="jumbotron vertical-center">
-    <div class="row">
-        <div class="col-md-auto">
-            <div class="card peach-gradient p-5 ">
-                <div class="card-body text-center ">
-                    <h4 class="card-title white-text"><strong>Continue With</strong></h4>
-                    <div class="row justify-content-center">
-                        {#                        <a class="btn-floating accent-1 end-btn waves-effect waves-light m-3"><i#}
-                        {#                                class="fa fa-google"></i></a>#}
-                        <a id="fb-login-custom" class="btn-floating accent-1 end-btn waves-effect waves-light m-3"><i
-                                class="fa fa-facebook"></i></a>
-                        {#                        <a class="btn-floating accent-1 end-btn waves-effect waves-light m-3"><i#}
-                        {#                                class="fa fa-twitter"></i></a>#}
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<button id="open-model-button" type="button" class="btn btn-primary" data-toggle="modal" data-target="#frameModalBottom"
+<button id="open-model-button" type="button" class="btn btn-primary" data-toggle="modal"
+        data-target="#frameModalBottom"
         style="display: none"></button>
 <div class="modal fade bottom" id="frameModalBottom" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
      aria-hidden="true">
@@ -69,49 +54,218 @@
         <div class="modal-content">
             <div class="modal-body">
                 <div class="row d-flex justify-content-center align-items-center">
-                    <p class="pt-3 pr-2">Please Login with Facebook in Order to Continue. We require only your Name and
-                        Email in order to Login.</p>
+                    <p class="pt-3 pr-2" id="modal-message"></p>
                     <button type="button" class="btn peach-gradient" data-dismiss="modal">OK</button>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+{% if session==False %}
+    <div class="jumbotron vertical-center">
+        <div class="row">
+            <div class="col-md-auto">
+                <div class="card peach-gradient p-5 ">
+                    <div class="card-body text-center ">
+                        <h4 class="card-title white-text"><strong>Continue With</strong></h4>
+                        <div class="row justify-content-center">
+                            {#                        <a class="btn-floating accent-1 end-btn waves-effect waves-light m-3"><i#}
+                            {#                                class="fa fa-google"></i></a>#}
+                            <a id="fb-login-custom"
+                               class="btn-floating accent-1 end-btn waves-effect waves-light m-3"><i
+                                    class="fa fa-facebook"></i></a>
+                            {#                        <a class="btn-floating accent-1 end-btn waves-effect waves-light m-3"><i#}
+                            {#                                class="fa fa-twitter"></i></a>#}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modalLoginForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <h4 class="modal-title w-100 font-weight-bold">
+                        Sign in
+                        <span class="font-small font-weight-light">(No Signup Required)</span>
+                    </h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body mx-3">
+                    <div class="md-form mb-4">
+                        <i class="fa fa-lock prefix grey-text"></i>
+                        <input type="text" id="defaultForm-name" class="form-control validate">
+                        <label data-error="wrong" data-success="right" for="defaultForm-name">Your Name</label>
+                    </div>
+                    <div class="md-form mb-5">
+                        <i class="fa fa-envelope prefix grey-text"></i>
+                        <input type="email" id="defaultForm-email" class="form-control validate">
+                        <label data-error="wrong" data-success="right" for="defaultForm-email">Your email</label>
+                    </div>
+                </div>
+                <div class="modal-footer d-flex justify-content-center">
+                    <button class="btn btn-default peach-gradient" onclick="login()">Login <i
+                            class="fa fa-sign-in ml-1"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% else %}
+    <div class="container">
+
+        <div class="row m-4">
+            <h4 class="font-weight-bold w-100"> Add Movie</h4>
+        </div>
+        <br>
+        <div class="row m-4">
+            <div id="add-movie-form" class="md-form mb-4">
+                <i class="fa fa-file-movie-o prefix grey-text"></i>
+                <input type="text" id="movie-name" class="form-control validate">
+                <label for="movie-name">Movie Name</label>
+                <div id="select-movie-row"></div>
+                <button id="add-row-button" class="btn btn-default peach-gradient" onclick="add_row()">Add Row <i
+                        class="fa fa-plus ml-1"></i></button>
+                <button class="btn btn-default peach-gradient" onclick="add_movie()">Submit</button>
+            </div>
+        </div>
+
+    </div>
 {% endif %}
+
 
 <script type="text/javascript" src="/static/js/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="/static/js/popper.min.js"></script>
 <script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="/static/js/mdb.min.js"></script>
 {% if session==False %}
-<script>
-    document.getElementById('fb-login-custom').addEventListener('click', function () {
-        FB.login(function (response) {
-            if (response.authResponse) {
-                FB.api('/me', {locale: 'en_US', fields: 'name, email'},
-                    function (response) {
-                        if (!(response.email && response.name)) {
-                            $('#open-model-button').click();
+    <script>
+        document.getElementById('fb-login-custom').addEventListener('click', function () {
+            FB.login(function (response) {
+                if (response.authResponse) {
+                    FB.api('/me', {locale: 'en_US', fields: 'name, email'},
+                        function (response) {
+                            if (!(response.email && response.name)) {
+                                $('#modal-message').html('Please Login with Facebook in Order to Continue. We require only your Name and Email in order to Login.');
+                                $('#open-model-button').click();
+                            }
+                            else {
+                                $.ajax({
+                                    url: '/login',
+                                    type: 'POST',
+                                    data: JSON.stringify({name: response.name, email: response.email}),
+                                    contentType: 'application/json; charset=utf-8',
+                                    dataType: 'json',
+                                    async: false,
+                                    success: function (data) {
+                                        location.reload();
+                                    }
+                                });
+                            }
                         }
-                        else {
-                            $.ajax({
-                                url: '/login',
-                                type: 'POST',
-                                data: JSON.stringify({name:response.name,email:response.email}),
-                                contentType: 'application/json; charset=utf-8',
-                                dataType: 'json',
-                                async: false,
-                                success: function (data) {
-                                    location.reload();
-                                }
-                            });
-                        }
-                    }
-                );
+                    );
+                }
+            }, {scope: 'email,public_profile', return_scopes: true});
+        }, false);
+    </script>
+    <script>
+        function login() {
+            $.ajax({
+                url: '/login',
+                type: 'POST',
+                data: JSON.stringify({name: $('#defaultForm-name').val(), email: $('#defaultForm-email').val()}),
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                async: false,
+                success: function (data) {
+                    location.reload();
+                }
+            });
+        }
+    </script>
+{% else %}
+    <script>
+        let total_rows = 0;
+        let avaliable_rows = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+
+        function add_row() {
+            if ($('#movie-name').val() === '')
+                return;
+            if (total_rows > 0)
+                if (
+                    $('#movie-row' + total_rows.toString()).val() === ''
+                    || $('#totalseats' + total_rows.toString()).val() === ''
+                )
+                    return;
+
+            if (total_rows + 1 === 26) {
+                $('#add-row-button').hide();
             }
-        }, {scope: 'email,public_profile', return_scopes: true});
-    }, false);
-</script>
+            if (total_rows > 0)
+                avaliable_rows = avaliable_rows.filter(m => {
+                    return m !== $('#movie-row' + total_rows.toString()).val();
+                });
+
+            total_rows += 1;
+            let options = ``;
+            for (let i = 0; i < avaliable_rows.length; i++) {
+                options += `<option value='${avaliable_rows[i]}'>${avaliable_rows[i]}</option>`;
+            }
+            $('#select-movie-row').append(`
+                <div class="row">
+                        <div class="col-6">
+                            <select class="form-control" id="movie-row${total_rows}">
+                                <option disabled selected>Select Row</option>
+                                ${options}
+                            </select>
+                        </div>
+                        <div class="col-6" style="top:-10px">
+                            <input type="number" id="totalseats${total_rows}" class="form-control validate">
+                            <label for="totalseats${total_rows}" style="left:15px">Seats</label>
+                        </div>
+                </div>
+            `);
+        }
+
+        function add_movie() {
+            if ($('#movie-name').val() === '')
+                return;
+            let seatinfo = {};
+            for (let i = 1; i < total_rows + 1; i++) {
+                seatinfo[$('#movie-row' + i.toString()).val()] = {
+                    numberOfSeats: parseInt($('#totalseats' + i.toString()).val()),
+                    aisleSeats: []
+                }
+            }
+            let request = {name: $('#movie-name').val(), seatinfo: seatinfo};
+            $.ajax({
+                url: '/screens',
+                type: 'POST',
+                data: JSON.stringify(request),
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                async: false,
+                success: function (data) {
+                    if (!data['success'])
+                        alert('Failed');
+                    else {
+                        $('#modal-message').html('Movie Added Successfully');
+                        $('#open-model-button').click();
+                        $('#movie-name').val('');
+                        $('#select-movie-row').html('');
+                        total_rows = 0;
+                        avaliable_rows = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+                    }
+                }
+            });
+
+        }
+    </script>
 {% endif %}
 </body>
 

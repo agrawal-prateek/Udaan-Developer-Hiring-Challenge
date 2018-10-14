@@ -1,33 +1,123 @@
-{
-  "name": "inox",
-  "seatInfo": {
-	"A": {
-	  "numberOfSeats": 10,
-	  "aisleSeats": [
-		0,
-		5,
-		6,
-		9
-	  ]
-	},
-	"B": {
-	  "numberOfSeats": 15,
-	  "aisleSeats": [
-		0,
-		5,
-		6,
-		9
-	  ]
-	},
-	"D": {
-	  "numberOfSeats": 20,
-	  "aisleSeats": [
-		0,
-		5,
-		6,
-		9
-	  ]
+[
+  {
+	"name": "inox",
+	"seatInfo": {
+	  "A": {
+		"numberOfSeats": 10,
+		"aisleSeats": [
+		  0,
+		  5,
+		  6,
+		  9
+		]
+	  },
+	  "B": {
+		"numberOfSeats": 15,
+		"aisleSeats": [
+		  0,
+		  5,
+		  6,
+		  9
+		]
+	  },
+	  "D": {
+		"numberOfSeats": 20,
+		"aisleSeats": [
+		  0,
+		  5,
+		  6,
+		  9
+		]
+	  }
+	}
+  },
+  {
+	"name": "Demo Movie 2",
+	"seatInfo": {
+	  "A": {
+		"numberOfSeats": 50,
+		"aisleSeats": [
+		  0,
+		  1,
+		  7,
+		  9
+		]
+	  },
+	  "C": {
+		"numberOfSeats": 15,
+		"aisleSeats": [
+		  10,
+		  5,
+		  7,
+		  1
+		]
+	  },
+	  "F": {
+		"numberOfSeats": 11,
+		"aisleSeats": [
+		  6,
+		  9
+		]
+	  }
+	}
+  },
+  {
+	"name": "New Movie 3",
+	"seatInfo": {
+	  "A": {
+		"numberOfSeats": 11,
+		"aisleSeats": [
+		  0,
+		  1,
+		  7,
+		  9
+		]
+	  },
+	  "C": {
+		"numberOfSeats": 5,
+		"aisleSeats": [
+		  1
+		]
+	  },
+	  "F": {
+		"numberOfSeats": 11,
+		"aisleSeats": [
+		  6,
+		  9,
+		  10
+		]
+	  },
+	  "G": {
+		"numberOfSeats": 57,
+		"aisleSeats": [
+		  6,
+		  9,
+		  10,
+		  50,
+		  1,
+		  18,
+		  12,
+		  48,
+		  45,
+		  30,
+		  35,
+		  38,
+		  42
+		]
+	  },
+	  "N": {
+		"numberOfSeats": 20,
+		"aisleSeats": [
+		  6,
+		  9,
+		  10,
+		  5,
+		  1,
+		  18,
+		  12,
+		  8,
+		]
+	  }
 	}
   }
-}
-
+]

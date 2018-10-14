@@ -78,6 +78,11 @@ def logout():
     return redirect(url_for('show_homepage'))
 
 
+@app.route('/getmovieslist')
+def getmovieslist():
+    return success(success=True, movies=read_movie_data())
+
+
 @app.route('/screens', methods=['POST'])
 def add_movie_screen():
     try:

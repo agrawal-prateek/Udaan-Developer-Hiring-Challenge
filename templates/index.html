@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -11,7 +10,6 @@
     <link href="/static/css/mdb.min.css" rel="stylesheet">
     <link href="/static/css/style.css" rel="stylesheet">
 </head>
-
 <body>
 
 {% if session==False %}
@@ -36,6 +34,17 @@
         <img src="/static/img/udaan.png" height="70" alt="mdb logo">
         <strong>Ticket Booking Platform</strong>
     </a>
+
+    <ul class="nav tabs-cyan" id="myTab" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link  white-text waves-light active" data-toggle="tab" href="#tab1" role="tab"
+               aria-controls="tab1">Add Movie</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link white-text waves-light" data-toggle="tab" href="#tab2" role="tab" aria-controls="tab2"
+               onclick="loadmovies()">Avaliablity</a>
+        </li>
+    </ul>
     {% if session==True %}
         <a href="/logout" class="btn btn-outline-white btn-sm my-0"><strong>Logout</strong><i
                 class="fa fa-sign-in ml-2"></i></a>
@@ -117,24 +126,68 @@
         </div>
     </div>
 {% else %}
-    <div class="container">
 
-        <div class="row m-4">
-            <h4 class="font-weight-bold w-100"> Add Movie</h4>
-        </div>
-        <br>
-        <div class="row m-4">
-            <div id="add-movie-form" class="md-form mb-4">
-                <i class="fa fa-file-movie-o prefix grey-text"></i>
-                <input type="text" id="movie-name" class="form-control validate">
-                <label for="movie-name">Movie Name</label>
-                <div id="select-movie-row"></div>
-                <button id="add-row-button" class="btn btn-default peach-gradient" onclick="add_row()">Add Row <i
-                        class="fa fa-plus ml-1"></i></button>
-                <button class="btn btn-default peach-gradient" onclick="add_movie()">Submit</button>
+    <div class="tab-content">
+        <div class="tab-pane active" id="tab1" role="tabpanel">
+            <div class="container">
+                <div class="row m-4">
+                    <h4 class="font-weight-bold w-100"> Add Movie</h4>
+                </div>
+                <br>
+                <div class="row m-4">
+                    <div id="add-movie-form" class="md-form mb-4">
+                        <i class="fa fa-file-movie-o prefix grey-text"></i>
+                        <input type="text" id="movie-name" class="form-control validate">
+                        <label for="movie-name">Movie Name</label>
+                        <div id="select-movie-row"></div>
+                        <button id="add-row-button" class="btn btn-default peach-gradient" onclick="add_row()">Add Row
+                            <i
+                                    class="fa fa-plus ml-1"></i></button>
+                        <button class="btn btn-default peach-gradient" onclick="add_movie()">Submit</button>
+                    </div>
+                </div>
             </div>
         </div>
+        <div class="tab-pane" id="tab2" role="tabpanel">
+            <div class="container">
+                <div class="row m-4">
+                    <h4 class="font-weight-bold w-100"> Check Avaliable Seats</h4>
+                </div>
+                <br>
+                <div class="row m-4">
+                    <div id="availablity-form" class="md-form mb-4">
+                        <div class="row">
+                            <div class="col-3">
+                                <i class="fa fa-file-movie-o prefix grey-text"></i>
+                            </div>
+                            <div class="col-9">
+                                <select class="form-control" id="availablemovies">
+                                    <option disabled selected>Select Movie</option>
+                                </select>
+                            </div>
+                        </div>
 
+                        <button class="btn btn-default peach-gradient" onclick="check_availablity()">Submit</button>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="table-responsive">
+                        <table class="table table-striped" id="table-available-seat">
+                            <caption id="caption-available-seat"></caption>
+                            <thead class="peach-gradient">
+                            <tr>
+                                <th class="white-text" scope="col"><strong>Row</strong></th>
+                                <th class="white-text" scope="col"><strong>Available Seats</strong></th>
+                            </tr>
+                            </thead>
+                            <tbody id="available-tbody"></tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
     </div>
 {% endif %}
 
@@ -242,7 +295,7 @@
                     aisleSeats: []
                 }
             }
-            let request = {name: $('#movie-name').val(), seatinfo: seatinfo};
+            let request = {name: $('#movie-name').val(), seatInfo: seatinfo};
             $.ajax({
                 url: '/screens',
                 type: 'POST',
@@ -263,10 +316,45 @@
                     }
                 }
             });
+        }
+    </script>
+    <script>
+        $(function () {
+            $('#myTab a:first').tab('show');
+        })
+    </script>
+    <script>
+        function loadmovies() {
+            $.ajax({
+                url: "/getmovieslist",
+                success: function (data) {
+                    data = JSON.parse(data);
+                    let options = `<option disabled selected>Select Movie</option>`;
+                    for (let i = 0; i < data['movies'].length; i++) {
+                        options += `<option value='${data['movies'][i]['name']}'>${data['movies'][i]['name']}</option>`;
+                    }
+                    $('#availablemovies').html(options);
+                }
+            });
+        }
 
+        function check_availablity() {
+            let movie_name = $('#availablemovies').val();
+            $.ajax({
+                url: `/screens/${movie_name}/seats?status=unreserved`,
+                success: function (data) {
+                    data = JSON.parse(data)['seats'];
+                    $('#caption-available-seat').html('<h4><strong>Available Seats for ' + movie_name + '</strong></h4>');
+                    $('#available-tbody').html('');
+                    Object.keys(data).forEach(function (key) {
+                        $('#available-tbody').append(
+                            `<tr><td>${key}</td><td>${data[key]}</td></tr>`
+                        );
+                    });
+                }
+            });
         }
     </script>
 {% endif %}
 </body>
-
 </html>

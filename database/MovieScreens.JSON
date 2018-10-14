@@ -1,1 +1,33 @@
-[{"name": "kjdnekj", "seatinfo": {"S": {"numberOfSeats": 4, "aisleSeats": []}}}]
+{
+  "name": "inox",
+  "seatInfo": {
+	"A": {
+	  "numberOfSeats": 10,
+	  "aisleSeats": [
+		0,
+		5,
+		6,
+		9
+	  ]
+	},
+	"B": {
+	  "numberOfSeats": 15,
+	  "aisleSeats": [
+		0,
+		5,
+		6,
+		9
+	  ]
+	},
+	"D": {
+	  "numberOfSeats": 20,
+	  "aisleSeats": [
+		0,
+		5,
+		6,
+		9
+	  ]
+	}
+  }
+}
+

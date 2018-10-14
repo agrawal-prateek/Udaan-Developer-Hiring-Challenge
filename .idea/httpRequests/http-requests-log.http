@@ -1,3 +1,17 @@
+GET http://localhost:9090/screens/kjdnekj/seats?status=unreserved
+Accept: application/json
+
+<> 2018-10-15T023548.501.html
+
+###
+
+GET http://localhost:9090/screens/kjdnekj/seats?status=unreserved
+Accept: application/json
+
+<> 2018-10-15T023417.501.html
+
+###
+
 POST http://localhost:9090/screens/inox/reserve
 Content-Type: application/json
 
@@ -425,18 +439,6 @@ GET http://localhost:9090/screens/inox/seats?status=unreservedd
 Accept: application/json
 
 <> 2018-10-14T125339.501.html
-
-###
-
-GET http://localhost:9090/screens/inox/seats?status=unreserved
-Accept: application/json
-
-<> 2018-10-14T125330.200.html
-
-###
-
-GET http://localhost:9090/screens/inox/seats?status=unreserveda
-Accept: application/json
 
 ###
 

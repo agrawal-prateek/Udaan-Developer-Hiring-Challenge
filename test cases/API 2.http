@@ -1,0 +1,31 @@
+
+POST http://localhost:9090/screens/inox/reserve
+Content-Type: application/json
+
+{
+  "seats": {
+	"A": [
+	  1,
+	  80
+	]
+  }
+}
+
+###
+POST http://localhost:9090/screens/inox/reserve
+Content-Type: application/json
+
+{
+  "seats": {
+	"A": [
+	  5,
+      0
+	],
+	"B": [
+	  8,
+	  7
+	]
+  }
+}
+
+###

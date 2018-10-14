@@ -1,0 +1,46 @@
+[
+  {
+	"name": "inox",
+	"seatInfo": {
+	  "A": {
+		"numberOfSeats": 10,
+		"aisleSeats": [
+		  7,
+		  5,
+		  0,
+		  2,
+		  1,
+		  8
+		]
+	  },
+	  "B": {
+		"numberOfSeats": 15,
+		"aisleSeats": [
+		  5,
+		  6,
+		  9,
+		  1,
+		  2
+		]
+	  },
+	  "D": {
+		"numberOfSeats": 20,
+		"aisleSeats": [
+		  0,
+		  5,
+		  9,
+		  6,
+		  7
+		]
+	  },
+	  "E": {
+		"numberOfSeats": 50,
+		"aisleSeats": [
+		  5,
+		  6,
+		  9
+		]
+	  }
+	}
+  }
+]

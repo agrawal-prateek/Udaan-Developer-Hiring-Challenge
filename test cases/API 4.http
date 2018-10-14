@@ -1,0 +1,4 @@
+GET http://localhost:9090/screens/inox/seats?numSeats=3&choice=A4
+Accept: application/json
+
+###

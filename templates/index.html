@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Ticket Booking Platform</title>
+    <link rel="stylesheet" href="/static/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/css/mdb.min.css" rel="stylesheet">
+    <link href="/static/css/style.css" rel="stylesheet">
+</head>
+
+<body>
+<div id="fb-root"></div>
+<script>(function (d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s);
+    js.id = id;
+    js.src = 'https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v3.1&appId=153101032000995&autoLogAppEvents=1';
+    fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+</script>
+<nav class="navbar navbar-dark peach-gradient primary-color">
+    <a class="navbar-brand" href="/">
+        <img src="/static/img/udaan.png" height="70" alt="mdb logo">
+        <strong>Ticket Booking Platform</strong>
+    </a>
+</nav>
+
+<div class="jumbotron vertical-center">
+    <div class="row">
+        <div class="col-md-auto">
+            <div class="card peach-gradient p-5 ">
+                <div class="card-body text-center ">
+                    <h4 class="card-title white-text"><strong>Continue With</strong></h4>
+                    <div class="row justify-content-center">
+                        <a class="btn-floating accent-1 end-btn waves-effect waves-light m-3"><i
+                                class="fa fa-google"></i></a>
+                        <a id="fb-login-custom" class="btn-floating accent-1 end-btn waves-effect waves-light m-3"><i
+                                class="fa fa-facebook"></i></a>
+                        <a class="btn-floating accent-1 end-btn waves-effect waves-light m-3"><i
+                                class="fa fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script type="text/javascript" src="/static/js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="/static/js/popper.min.js"></script>
+<script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/static/js/mdb.min.js"></script>
+<script>
+    document.getElementById('fb-login-custom').addEventListener('click', function () {
+        FB.login(function (response) {
+            if (response.authResponse) {
+                FB.api('/me', {locale: 'en_US', fields: 'name, email'},
+                    function (response) {
+                        console.log(response.email);
+                        console.log(response.name);
+                    }
+                );
+            }
+        }, {scope: 'email,public_profile', return_scopes: true});
+    }, false);
+</script>
+</body>
+
+</html>

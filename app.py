@@ -86,6 +86,11 @@ def show_privacy():
 
 @app.route('/login', methods=['POST'])
 def login():
+    """
+    Accepts the data of the user coming from post method
+    Login's the user if exist in the database or else Creates new user in the database
+    :return: Function success
+    """
     user_data = request.get_json()
     try:
         users = read_user_data()
@@ -111,6 +116,10 @@ def login():
 
 @app.route('/logout')
 def logout():
+    """
+    Logs out the user if exist in the session
+    :return: Response object to redirect to homepage
+    """
     session.pop('name', None)
     session.pop('email', None)
     return redirect(url_for('show_homepage'))
@@ -118,6 +127,9 @@ def logout():
 
 @app.route('/getmovieslist')
 def getmovieslist():
+    """
+    Returns the Response object with movies data
+    """
     return success(success=True, movies=read_movie_data())
 
 
@@ -218,9 +230,14 @@ def available_seats(screen_name):
 
 @app.errorhandler(404)
 def page_not_found(e):
+    """
+    Returns the Response object with http status code 404 and renders the 404.html template
+    """
     print(e)
     return render_template('404.html'), 404
 
 
 if __name__ == '__main__':
+
+    # Run application on port 9090 with providing access on remote machines
     app.run(host='0.0.0.0', port=9090, debug=True)

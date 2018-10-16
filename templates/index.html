@@ -230,17 +230,18 @@
     </script>
     <script>
         function login() {
-            $.ajax({
-                url: '/login',
-                type: 'POST',
-                data: JSON.stringify({name: $('#defaultForm-name').val(), email: $('#defaultForm-email').val()}),
-                contentType: 'application/json; charset=utf-8',
-                dataType: 'json',
-                async: false,
-                success: function (data) {
-                    location.reload();
-                }
-            });
+            if ($('#defaultForm-name').val() && $('#defaultForm-email').val())
+                $.ajax({
+                    url: '/login',
+                    type: 'POST',
+                    data: JSON.stringify({name: $('#defaultForm-name').val(), email: $('#defaultForm-email').val()}),
+                    contentType: 'application/json; charset=utf-8',
+                    dataType: 'json',
+                    async: false,
+                    success: function (data) {
+                        location.reload();
+                    }
+                });
         }
     </script>
 {% else %}

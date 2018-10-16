@@ -3,40 +3,73 @@ from flask import *
 import os
 import json
 
+# Create Application Object
 app = Flask(__name__)
 app.secret_key = 'dhwbiud7238eygf7843gf7r584e'
 
 
 def invalid_request(**kwargs):
+    """
+    Function to return response object if request is invalid
+    :param kwargs: Data to return with response
+    :return: Response with data and response status code 501
+    """
     return json.dumps(kwargs), 501, {'ContentType': 'application/json'}
 
 
 def success(**kwargs):
+    """
+    Function to return response object if request is successfully completed
+    :param kwargs: Data to return with response
+    :return: Response with data and response status code 200
+    """
     return json.dumps(kwargs), 200, {'ContentType': 'application/json'}
 
 
 def update_movie_data(movie_data):
+    """
+    Function to update Movies data
+    :param movie_data: New data of movies to override previous
+    :return: None
+    """
     with open(os.path.join('database', 'MovieScreens.JSON'), 'w+') as database:
         database.write(json.dumps(movie_data))
 
 
 def read_movie_data():
+    """
+    Function to read Movie data
+    :return: Movies data in the form of JSON object
+    """
     with open(os.path.join('database', 'MovieScreens.JSON'), 'r') as database:
         return json.loads(database.read())
 
 
 def read_user_data():
+    """
+    Function to read User's data
+    :return: User's data in the form of JSON object
+    """
     with open(os.path.join('database', 'users.JSON'), 'r') as database:
         return json.loads(database.read())
 
 
 def update_user_data(user_data):
+    """
+    Function to update User's data
+    :param user_data: New data of Users as JSON object to override previous
+    :return: None
+    """
     with open(os.path.join('database', 'users.JSON'), 'w+') as database:
         database.write(json.dumps(user_data))
 
 
 @app.route('/')
 def show_homepage():
+    """
+    Function to Render Homepage
+    :return: Render's the index.html template
+    """
     if 'name' in session:
         return render_template('index.html', session=True), 200
     return render_template('index.html', session=False), 200
@@ -44,6 +77,10 @@ def show_homepage():
 
 @app.route('/privacy_policy')
 def show_privacy():
+    """
+    Function to Render Privacy Policies Page
+    :return: Render's the template privacy_policy.html
+    """
     return render_template('privacy_policy.html'), 200
 
 

@@ -1,9 +1,5 @@
 # Ticket Booking System
 
-**See Live on:** [http://35.200.230.23:9090][1]
-
-**Source Code:** [https://github.com/agrawal-prateek/Udaan-Developer-Hiring-Chellange][2]
-
 **Features:**
 
  - API To accept details of movie screen

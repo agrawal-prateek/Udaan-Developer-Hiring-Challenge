@@ -42,17 +42,17 @@ To run this project, Go to project's root directory and type the following comma
 
         python3 app.py
 
-For more query, contact me:
 
-##### Prateek Agrawal
+For any query, feel free and contact me
 
-prateekagrawal89760@gmail.com
 
-https://agrawal-prateek.github.io
+**Prateek Agrawal**  
+prateekagrawal89760@gmail.com  
+[Website][400] | [LinkedIn][500] | (+91) 7464847884
 
-(+91) 7464847884
+#### Thanks for Reading
 
-### Thanks for reading
-  [1]: http://35.200.230.23:9090
-  [2]: https://github.com/agrawal-prateek/Udaan-Developer-Hiring-Chellange
-  [3]: https://www.python.org/downloads/
+
+ [400]: http://agrawalprateek.me
+ [500]: https://www.linkedin.com/in/agrawal-prateek
+ [3]: https://www.python.org/downloads/

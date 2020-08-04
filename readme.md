@@ -47,7 +47,7 @@ For any query, feel free and contact me
 
 
 **Prateek Agrawal**  
-<img style="height:24px" src="https://img.icons8.com/color/48/000000/linkedin.png"/> [LinkedIn][500]
+<img src="https://img.icons8.com/color/24/000000/linkedin.png"/> [LinkedIn][500]
 
 #### Thanks for Reading
 
